@@ -1,0 +1,9 @@
+{
+  "messages": [
+    {
+      "code": "invalidPhoneData",
+      "message": "Error procesando los datos del telefono, datos inválidos.",
+      "type": "ERROR"
+    }
+  ]
+}

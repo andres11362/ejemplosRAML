@@ -1,0 +1,326 @@
+#%RAML 1.0 Library
+uses:
+  annotations: ../../glapi-global-apis-commons-commons/annotations/annotationsLibrary.raml
+
+types:
+	address:
+    type: object
+    properties:
+      id:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "OPTIONAL"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "OPTIONAL"
+          - method: "PATCH"
+            input: "NONE"
+            output: "REQUIRED"       
+        type: number
+        description: |
+          unique identifier of the address.
+      typeAddress:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "OPTIONAL"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "REQUIRED"
+          - method: "PATCH"
+            input: "OPTIONAL"
+            output: "REQUIRED"  
+        type: object
+        properties:
+          id:
+            (annotations.bindingDefinition):
+              - method: "GET"
+                input: "NONE"
+                output: "OPTIONAL"
+              - method: "POST"
+                input: "REQUIRED"
+                output: "REQUIRED"
+              - method: "PATCH"
+                input: "OPTIONAL"
+                output: "REQUIRED"  
+            type: number  
+            description: |
+             Unique identifier of the type of address.
+          name:
+            (annotations.bindingDefinition):
+              - method: "GET"
+                input: "NONE"
+                output: "OPTIONAL"
+              - method: "POST"
+                input: "REQUIRED"
+                output: "REQUIRED"
+              - method: "PATCH"
+                input: "OPTIONAL"
+                output: "REQUIRED"  
+            type: string
+            enum: ["HOGAR", "OFICI"]
+            (annotations.enumDescription):
+              - HOGAR: Residential address.
+              - OFICI: Address of office or workplace
+            description: |
+              Name of the type of address.
+      location:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "OPTIONAL"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "REQUIRED"
+          - method: "PATCH"
+            input: "OPTIONAL"
+            output: "REQUIRED"  
+        type: object
+        properties:
+          (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "OPTIONAL"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "REQUIRED"
+          - method: "PATCH"
+            input: "OPTIONAL"
+            output: "REQUIRED"  
+          mainRoad:
+            type: object
+            properties:
+              street:
+                (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "OPTIONAL"
+                  - method: "POST"
+                    input: "REQUIRED"
+                    output: "REQUIRED"
+                  - method: "PATCH"
+                    input: "OPTIONAL"
+                    output: "REQUIRED"  
+                    type: string
+                enum: ["CALLE", "AVENIDA", "TRANSVERSAL", "DIAGONAL", "CARRERA"]
+                (annotations.enumDescription):
+                  - CALLE: A street is a linear urban space that allows the circulation of people and vehicles, 
+                           and gives access to buildings and lots that are on both sides.
+                  - AVENIDA: It is an important means of communication within a city or urban settlement. 
+                              Generally an avenue has two directions of circulation, differing from the one-way street
+                  - TRANSVERSAL: Transversal are those roads whose orientation is not the same as the 
+                                  streets in the sector but resembles the latter
+                  - DIAGONAL: Diagonal are those roads whose orientation is not the same as the races in the sector, 
+                              but resembles the one of them
+                  - CARRERA: Careers are those roads that have south - north orientation
+                description: Identify the type of main road where the address is located.
+              mainDescription: 
+                (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "OPTIONAL"
+                  - method: "POST"
+                    input: "REQUIRED"
+                    output: "REQUIRED"
+                  - method: "PATCH"
+                    input: "OPTIONAL"
+                    output: "REQUIRED"  
+                    type: string
+                description: |
+                  It is a complement to the main road, in some cases to make its location more recognizable.
+              mainNumber:
+                (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "OPTIONAL"
+                  - method: "POST"
+                    input: "REQUIRED"
+                    output: "REQUIRED"
+                  - method: "PATCH"
+                    input: "OPTIONAL"
+                    output: "REQUIRED"  
+                    type: number
+                description: |
+                  The number that complements the main road, in some cases to make its location easier.
+              bis:
+                (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "OPTIONAL"
+                  - method: "POST"
+                    input: "REQUIRED"
+                    output: "REQUIRED"
+                  - method: "PATCH"
+                    input: "OPTIONAL"
+                    output: "REQUIRED"  
+                    type: boolean
+                description: |
+                  The prefix BIS is assigned to differentiate routes of the same denomination. It is generally used in non-continuous track sections.
+              cardinal:
+                (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "OPTIONAL"
+                  - method: "POST"
+                    input: "REQUIRED"
+                    output: "REQUIRED"
+                  - method: "PATCH"
+                    input: "OPTIONAL"
+                    output: "REQUIRED"  
+                type: string
+                enum: ["NORTE", "SUR", "ORIENTE", "OCCIDENTE"]
+                (annotations.enumDescription):
+                  - NORTE: Cardinal point located in front of a person to whose right is the side from which the Sun rises, diametrically opposite to the south.
+                  - SUR: Cardinal point located behind a person to whose right is the side from which the Sun rises, diametrically opposite to the north.
+                  - ORIENTE: Cardinal point where the Sun rises at the equinoxes.
+                  - OCCIDENTE: Cardinal point where the Sun is hidden in the equinoxes.
+                description: |
+                            Geographic quadrant where the road axis is located, 
+                            indicates the quadrant to which the main road belongs in this case.
+          secondRoad:
+            (annotations.bindingDefinition):
+              - method: "GET"
+                input: "NONE"
+                output: "OPTIONAL"
+              - method: "POST"
+                input: "REQUIRED"
+                output: "REQUIRED"
+              - method: "PATCH"
+                input: "OPTIONAL"
+                output: "REQUIRED"  
+            type: object
+            properties:
+              numberOne:
+                (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "OPTIONAL"
+                  - method: "POST"
+                    input: "REQUIRED"
+                    output: "REQUIRED"
+                  - method: "PATCH"
+                    input: "OPTIONAL"
+                    output: "REQUIRED"  
+                type: number
+                description: |
+                  First Number Plate
+              bis:
+                (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "OPTIONAL"
+                  - method: "POST"
+                    input: "REQUIRED"
+                    output: "REQUIRED"
+                  - method: "PATCH"
+                    input: "OPTIONAL"
+                    output: "REQUIRED" 
+                type: boolean
+                description: |
+                  The prefix BIS is assigned to differentiate routes of the same denomination. 
+                  It is generally used in non-continuous track sections
+              cardinal:
+                (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "OPTIONAL"
+                  - method: "POST"
+                    input: "REQUIRED"
+                    output: "REQUIRED"
+                  - method: "PATCH"
+                    input: "OPTIONAL"
+                    output: "REQUIRED" 
+                type: string
+                enum: ["NORTE", "SUR", "ORIENTE", "OCCIDENTE"]
+                (annotations.enumDescription):
+                  - NORTE: Cardinal point located in front of a person to whose right is the side from which the Sun rises, diametrically opposite to the south.
+                  - SUR: Cardinal point located behind a person to whose right is the side from which the Sun rises, diametrically opposite to the north.
+                  - ORIENTE: Cardinal point where the Sun rises at the equinoxes.
+                  - OCCIDENTE: Cardinal point where the Sun is hidden in the equinoxes.
+                description: |
+                            Geographic quadrant where the road axis is located, 
+                            indicates the quadrant to which the main road belongs in this case.
+              numberTwo:
+                (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "OPTIONAL"
+                  - method: "POST"
+                    input: "REQUIRED"
+                    output: "REQUIRED"
+                  - method: "PATCH"
+                    input: "OPTIONAL"
+                    output: "REQUIRED" 
+                type: number
+                description: |
+                  Second Plate Number
+          additionalDescription:
+            (annotations.bindingDefinition):
+              - method: "GET"
+                input: "NONE"
+                output: "OPTIONAL"
+              - method: "POST"
+                input: "REQUIRED"
+                output: "REQUIRED"
+              - method: "PATCH"
+                input: "OPTIONAL"
+                output: "REQUIRED" 
+            type: string
+            description: |
+              Additional description that complements the address
+      geographicalLocation:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "OPTIONAL"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "REQUIRED"
+          - method: "PATCH"
+            input: "OPTIONAL"
+            output: "REQUIRED" 
+        type: object
+        properties:
+          country:
+            (annotations.bindingDefinition):
+              - method: "GET"
+                input: "NONE"
+                output: "OPTIONAL"
+              - method: "POST"
+                input: "REQUIRED"
+                output: "REQUIRED"
+              - method: "PATCH"
+                input: "OPTIONAL"
+                output: "REQUIRED"
+            type: string
+            description: |
+              Country of residence
+          state:
+            (annotations.bindingDefinition):
+              - method: "GET"
+                input: "NONE"
+                output: "OPTIONAL"
+              - method: "POST"
+                input: "REQUIRED"
+                output: "REQUIRED"
+              - method: "PATCH"
+                input: "OPTIONAL"
+                output: "REQUIRED"
+            type: string
+            description: |
+              State or department of residence
+          city:
+            (annotations.bindingDefinition):
+              - method: "GET"
+                input: "NONE"
+                output: "OPTIONAL"
+              - method: "POST"
+                input: "REQUIRED"
+                output: "REQUIRED"
+              - method: "PATCH"
+                input: "OPTIONAL"
+                output: "REQUIRED"
+            type: string
+            description: |
+              City of residenc

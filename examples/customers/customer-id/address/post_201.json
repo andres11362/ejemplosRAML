@@ -1,0 +1,29 @@
+{
+  "address": {
+	"typeAddress": {
+  	   "id": 100,
+  	   "name": "HOGAR"
+	},
+	"location": {
+  	   "mainRoad": {
+    	      "street": "Avenida",
+    	      "description": "Boyaca",
+    	      "number": 23,
+    	      "bis": false,
+    	      "cardinal": "Sur"
+  	  },
+  	   "secondRoad": {
+    	      "numberOne": 24,
+    	      "bis": false,
+    	      "cardinal": "",
+    	      "numberTwo": 17
+  	   },
+  	   "addionalDescription": ""
+	   },
+	"geographicalLocation": {
+  	   "country": "Colombia",
+  	   "state": "Distrito capital",
+  	   "city": "Bogota D.C."
+	}
+  }
+}

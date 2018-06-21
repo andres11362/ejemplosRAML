@@ -1,0 +1,28 @@
+{
+  "customer": {
+    "id": 43040212,
+    "identityDocument": [
+        {
+            "type": "CC",
+            "number": "1136883231"
+         }
+    ],
+    "name": "Rodrigo Andrés",
+    "surname": "Góngora",
+    "secondSurname": "Herrera",
+    "birthDate": "1991/07/10",
+    "sex": "Masculino",
+    "nationality": [
+          {
+              "country": {
+                 "id": 250,
+                  "code": "FR",
+                 "name": "Francia",
+                 "shortName": "Fra"
+             }
+         }
+    ],
+    "email": "correo@correo.com",
+    "hasPassedAway": false,
+    "isCustomer": true
+}

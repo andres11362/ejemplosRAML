@@ -1,0 +1,106 @@
+#%RAML 1.0 Library
+uses:
+  annotations: ../../glapi-global-apis-commons-commons/annotations/annotationsLibrary.raml
+
+types:
+  phone:
+    type: object
+    properties:
+      id:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "OPTIONAL"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "OPTIONAL"
+          - method: "PATCH"
+            input: "NONE"
+            output: "REQUIRED"  
+        type: number
+        description: 
+          Unique identifier of the telephone.
+      phoneType:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "REQUIRED"
+          - method: "PATCH"
+            input: "OPTIONAL"
+            output: "REQUIRED"  
+        type: object
+        properties:
+          id:
+            (annotations.bindingDefinition):
+              - method: "GET"
+                input: "NONE"
+                output: "REQUIRED"
+              - method: "POST"
+                input: "REQUIRED"
+                output: "REQUIRED"
+              - method: "PATCH"
+                input: "OPTIONAL"
+                output: "REQUIRED"  
+            type: string
+            description: |
+              Unique identifier of the telephone type.
+          name:
+            (annotations.bindingDefinition):
+              - method: "GET"
+                input: "NONE"
+                output: "REQUIRED"
+              - method: "POST"
+                input: "REQUIRED"
+                output: "REQUIRED"
+              - method: "PATCH"
+                input: "OPTIONAL"
+                output: "REQUIRED"  
+            type: string
+            enum: ["WORK", "MOVIL", "HOME"]
+            (annotations.enumDescription):
+              - WORK: Current office or work phone.
+              - MOVIL: Cell phone that owns.
+              - HOME: Current residence phone.
+            description: Type of phone the customer owns
+      indicative:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "REQUIRED"
+          - method: "PATCH"
+            input: "OPTIONAL"
+            output: "REQUIRED"  
+        type: string
+        description: Telephone code of the customer's telephone
+      number:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "REQUIRED"
+          - method: "PATCH"
+            input: "OPTIONAL"
+            output: "REQUIRED"  
+        type: string
+        description: Customer's phone number.
+      extension:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+          - method: "POST"
+            input: "REQUIRED"
+            output: "REQUIRED"
+          - method: "PATCH"
+            input: "OPTIONAL"
+            output: "REQUIRED"  
+        type: string
+        description: Customer extension number.  

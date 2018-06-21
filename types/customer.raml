@@ -1,0 +1,177 @@
+#%RAML 1.0 Library
+uses:
+  annotations: ../../glapi-global-apis-commons-commons/annotations/annotationsLibrary.raml
+
+types:
+  customer:
+    type: object
+    properties:
+      id: 
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: number
+        description: |
+          unique identifier of the client.
+      identityDocument:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: array
+        description: |
+          Customer’s list of identity documents.
+        items:
+          properties:
+            id:
+              (annotations.bindingDefinition):
+                - method: "GET"
+                  input: "NONE"
+                  output: "REQUIRED"
+              type: string
+              enum: ["CC", "CE", "PP"]
+              (annotations.enumDescription):
+                - CC: cedula de ciudadania.
+                - CE: cedula de extranjeria.
+                - PP: pasaporte
+              description: |
+                Type of customer's document
+            number:
+              (annotations.bindingDefinition):
+                - method: "GET"
+                  input: "NONE"
+                  output: "REQUIRED"
+              type: string
+              description: |
+                Customer's document number
+      name:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: string
+        description: |
+          Customer's name
+        required: true
+      surname:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: string
+        description: |
+          Customer's surname
+        required: true
+      secondSurname:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: string
+        description: |
+          Customer’s second surname
+        required: true
+      birthDate:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED" 
+        type: date-only
+        description: |
+          Date of birth of  customer
+      sex:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: string
+        enum: ["Masculino", "Femenino"]
+        (annotations.enumDescription):
+          - Masculino: The concept covers everything that is related to this individual or organism, 
+                       and also allows to identify and recognize aspects or manly behaviors.
+          - Femenino: It refers to what is proper, relative or belonging to women. It is, therefore, something or someone who has the distinctive characteristics of femininity.        
+        description: Customer's sex              
+      nationality:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: array
+        description: |
+          Customer's nationality
+        items:
+          properties:
+            country:
+              (annotations.bindingDefinition):
+                - method: "GET"
+                  input: "NONE"
+                  output: "REQUIRED"
+              type: object
+              properties:
+                id:
+                  (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "REQUIRED"
+                  type: number
+                  description: |
+                    Numeric ISO code of the country. Specifically, it is ISO 3166-1.
+                  required: true
+                code:
+                  (annotations.bindingDefinition):
+                    - method: "GET"
+                      input: "NONE"
+                      output: "REQUIRED"
+                  type: string 
+                  description: |
+                    Alphabetical ISO code of the country of two characters. In particular, it is ISO 3166-1
+                name:
+                  (annotations.bindingDefinition):
+                  - method: "GET"
+                    input: "NONE"
+                    output: "REQUIRED"
+                  type: string
+                  description: |
+                    Name of the country such as Spain, United States of America, etc.
+                shortName:
+                  (annotations.bindingDefinition):
+                    - method: "GET"
+                      input: "NONE"
+                      output: "REQUIRED"
+                  type: string
+                  description: |
+                    Short name of the country
+      email:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: string
+        description: |
+          Customer's email
+        required: true
+      hasPassedAway:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: boolean
+        description: |
+          Indicator that specifies if the customer has died
+      isCustomer:
+        (annotations.bindingDefinition):
+          - method: "GET"
+            input: "NONE"
+            output: "REQUIRED"
+        type: boolean
+        description: |
+          Indicator that specifies if the person is registered as a customer
+
+
+
+
+
+
+
+
