@@ -1,0 +1,12 @@
+{
+  "phone": {
+    "id": 100,
+    "phoneType":{
+      "id": "001",
+      "name": "MOVIL"
+    },
+    "indicative": "00320",
+    "number": "5748381",
+    "extension": ""
+  }
+}

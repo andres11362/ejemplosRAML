@@ -3,7 +3,7 @@ uses:
   annotations: ../../glapi-global-apis-commons-commons/annotations/annotationsLibrary.raml
 
 types:
-	address:
+  address:
     type: object
     properties:
       id:
@@ -78,16 +78,6 @@ types:
             output: "REQUIRED"  
         type: object
         properties:
-          (annotations.bindingDefinition):
-          - method: "GET"
-            input: "NONE"
-            output: "OPTIONAL"
-          - method: "POST"
-            input: "REQUIRED"
-            output: "REQUIRED"
-          - method: "PATCH"
-            input: "OPTIONAL"
-            output: "REQUIRED"  
           mainRoad:
             type: object
             properties:
@@ -102,7 +92,7 @@ types:
                   - method: "PATCH"
                     input: "OPTIONAL"
                     output: "REQUIRED"  
-                    type: string
+                type: string
                 enum: ["CALLE", "AVENIDA", "TRANSVERSAL", "DIAGONAL", "CARRERA"]
                 (annotations.enumDescription):
                   - CALLE: A street is a linear urban space that allows the circulation of people and vehicles, 
@@ -126,7 +116,7 @@ types:
                   - method: "PATCH"
                     input: "OPTIONAL"
                     output: "REQUIRED"  
-                    type: string
+                type: string
                 description: |
                   It is a complement to the main road, in some cases to make its location more recognizable.
               mainNumber:
@@ -140,7 +130,7 @@ types:
                   - method: "PATCH"
                     input: "OPTIONAL"
                     output: "REQUIRED"  
-                    type: number
+                type: number
                 description: |
                   The number that complements the main road, in some cases to make its location easier.
               bis:
@@ -154,7 +144,7 @@ types:
                   - method: "PATCH"
                     input: "OPTIONAL"
                     output: "REQUIRED"  
-                    type: boolean
+                type: boolean
                 description: |
                   The prefix BIS is assigned to differentiate routes of the same denomination. It is generally used in non-continuous track sections.
               cardinal:
@@ -323,4 +313,4 @@ types:
                 output: "REQUIRED"
             type: string
             description: |
-              City of residenc
+              City of residence

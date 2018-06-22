@@ -9,82 +9,92 @@ uses:
   address:  types/address.raml
   phone:    types/phone.raml
 
-  /customers:
+annotationTypes:
+  enumDescription: !include ../glapi-global-apis-commons-commons/annotations/enumDescription.raml
+
+resourceTypes:
+  collection: !include ../glapi-global-apis-commons-commons/resourceTypes/collection.raml
+  collection-item: !include ../glapi-global-apis-commons-commons/resourceTypes/collection-item.raml
+
+types:
+  errors: !include ../glapi-global-apis-commons-commons/types/errors.raml  
+  
+/customers:
+  description: |
+    Manages the customers of a bank.
+  type: collection
+
+  /{customer-id}:
     description: |
-      Manages the customers of a bank.
-    type: collection
+      Manage a specific client 
+    type: collection-item
+           
+    uriParameters:
+      customer-id:
+        description:                      
+          Customer's unique identifier
+        type: string
+        required: true
+        example: "1234" 
 
-    /{customer-id}:
+    get:
       description: |
-        Manage a specific client 
-      type: collection-item
-             
-      uriParameters:
-        customer-id:
-          description:                      
-            Customer's unique identifier
-          type: string
-          required: true
-          example: "1234" 
+        Service for recover the data of a specific client
 
-      get:
+      responses:
+        200:
+          headers:
+             Content-location:
+              display-name: content-location
+              description: This header must provide the URI to reach to resource
+              type: string
+              required: true
+              example: /customers/1234
+          body:
+            application/json:
+              example: !include examples/customers/customer-id/get_200.json
+              type: object
+              properties:
+                data:
+                  type: customer.customer
+
+    /address:
+      description: |
+        Service for to manage the data of a customer's addresses
+      type: collection  
+
+      post:
         description: |
-          Service for recover the data of a specific client
+         Service for creating an address.
+
+        body:
+          application/json:
+            example: !include examples/customers/customer-id/address/post_request.json
+            type: address.address
 
         responses:
-          200:
-            headers:
-               Content-location:
-                display-name: content-location
-                description: This header must provide the URI to reach to resource
-                type: string
-                required: true
-                example: /customers/1234
-            body:
+          201:
+            body: 
               application/json:
-                example: !include examples/customers/customer-id/get_200.json
+                example: !include examples/customers/customer-id/address/post_201.json
                 type: object
                 properties:
                   data:
-                    type: customer.customer
+                    type: address.address 
+          400:
+            body: 
+              application/json:
+                example:
+                  type: errors
+                  invalidAddressData:
+                    value: !include examples/customers/customer-id/address/post_400_invalidAddressData.json
+                    description: Example of JSON output for the insertion of an address without success due to insufficient data of the same
+                    displayName: JSON for when insufficient data for to insertion data of an address
 
-      /address:
+      /address-id:
         description: |
-          Service for to manage the data of a customer's addresses
-        type: collection  
-
-        post:
-          description: |
-           Service for creating an address.
-
-          body:
-            application/json:
-              example: !include examples/customers/customer-id/address
-              type: address.address
-
-          responses:
-            201:
-              body: 
-                application/json:
-                  example: !include examples/customers/customer-id/address/post_201.json
-                  type: object
-                  properties:
-                    data:
-                      type: address.address 
-            400:
-              body: 
-                application/json:
-                  example:
-                    type: errors
-                    invalidAddressData:
-                      value: !include examples/customers/customer-id/address/post_400_invalidAddressData.json
-                      description: Example of JSON output for the insertion of an address without success due to insufficient data of the same
-                      displayName: JSON for when insufficient data for to insertion data of an address
-
-        /address-id:
-          description: |
-            Manage a specific address
-          type: collection-item
+          Manage a specific address
+        type: collection-item
 
         uriParameters:
           address-id:
@@ -94,132 +104,116 @@ uses:
             required: true
             example: 12345
 
-          get:
-            description: |
-              Service for to recover the data of specific address
-
-            responses:
-              200:
-                headers:
-                  Content-location:
-                    display-name: content-location
-                    description: This header must provide the URI to reach to resource
-                    type: string
-                    required: true
-                    example: /address/1234
-                body:
-                  application/json:
-                    example: !include examples/customers/customer-id/address/address-id/get_200.json
-                    type: object
-                    properties:
-                      data:
-                        type: address.address
-
-          patch:
-            description: |
-              Service for updating the attributes of an address
-
-            body:
-              application/json:
-                example: !include examples/customers/customer-id/address/address-id/patch_request.json
-                type: address.address 
-
-            responses:
-              200:
-                description: Ok.
-
-      /phone:
-        description: |
-          Service for to manage the data of a customer's addresses
-        type: collection  
-
-        post:
+        get:
           description: |
-            Service for creating a phone.
+            Service for to recover the data of specific address
+
+          responses:
+            200:
+              headers:
+                Content-location:
+                  display-name: content-location
+                  description: This header must provide the URI to reach to resource
+                  type: string
+                  required: true
+                  example: /address/1234
+              body:
+                application/json:
+                  example: !include examples/customers/customer-id/address/address-id/get_200.json
+                  type: object
+                  properties:
+                    data:
+                      type: address.address
+
+        patch:
+          description: |
+            Service for updating the attributes of an address
 
           body:
             application/json:
-              example: !include examples/customers/customer-id/phone
-              type: phone.phone
+              example: !include examples/customers/customer-id/address/address-id/patch_request.json
+              type: address.address 
 
           responses:
-            201:
-              body: 
+            200:
+              description: Ok.
+
+    /phone:
+      description: |
+        Service for to manage the data of a customer's addresses
+      type: collection  
+
+      post:
+        description: |
+          Service for creating a phone.
+
+        body:
+          application/json:
+            example: !include examples/customers/customer-id/phone/post_request.json
+            type: phone.phone
+
+        responses:
+          201:
+            body: 
+              application/json:
+                example: !include examples/customers/customer-id/phone/post_201.json
+                type: object
+                properties:
+                  data:
+                    type: phone.phone
+          400:
+            body: 
+              application/json:
+                example:
+                  type: errors
+                  invalidAddressData:
+                    value: !include examples/customers/customer-id/phone/post_400_invalidPhoneData.json
+                    description: Example of JSON output for the insertion of a phone without success due to insufficient data of the same
+                    displayName: JSON for when insufficient data for to insertion data of a phone            
+
+      /{phone_id}:
+        description: |
+          Manage a specific phone
+        type: collection-item
+
+        uriParameters:
+          address-id:
+            description:
+              unique identifier of the phone  
+            type: number
+            required: true
+            example: 101
+
+          get:
+          description: |
+            Service for to recover the data of specific phone
+
+          responses:
+            200:
+              headers:
+                Content-location:
+                  display-name: content-location
+                  description: This header must provide the URI to reach to resource
+                  type: string
+                  required: true
+                  example: /phone/1234
+              body:
                 application/json:
-                  example: !include examples/customers/customer-id/phone/post_201.json
+                  example: !include examples/customers/customer-id/phone/phone-id/get_200.json
                   type: object
                   properties:
                     data:
                       type: phone.phone
-            400:
-              body: 
-                application/json:
-                  example:
-                    type: errors
-                    invalidAddressData:
-                      value: !include examples/customers/customer-id/phone/400_invalidPhoneData.json
-                      description: Example of JSON output for the insertion of a phone without success due to insufficient data of the same
-                      displayName: JSON for when insufficient data for to insertion data of a phone            
 
-        /{phone_id}:
-          description: |
-            Manage a specific phone
-          type: collection-item
-
-          uriParameters:
-            address-id:
-              description:
-                unique identifier of the phone  
-              type: number
-              required: true
-              example: 101
-
-            get:
+          patch:
             description: |
-              Service for to recover the data of specific phone
+              Service for updating the attributes of an phone
+
+            body:
+              application/json:
+                example: !include examples/customers/customer-id/phone/phone-id/patch_request.json
+                type: phone.phone 
 
             responses:
               200:
-                headers:
-                  Content-location:
-                    display-name: content-location
-                    description: This header must provide the URI to reach to resource
-                    type: string
-                    required: true
-                    example: /phone/1234
-                body:
-                  application/json:
-                    example: !include examples/customers/customer-id/phone/phone-id/get_200.json
-                    type: object
-                    properties:
-                      data:
-                        type: phone.phone
-
-            patch:
-              description: |
-                Service for updating the attributes of an phone
-
-              body:
-                application/json:
-                  example: !include examples/customers/customer-id/phone/phone-id/patch_request.json
-                  type: phone.phone 
-
-              responses:
-                200:
-                  description: Ok.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+                description: Ok.
